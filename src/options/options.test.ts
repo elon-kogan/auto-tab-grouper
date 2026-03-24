@@ -5,7 +5,7 @@ import { loadConfig, saveConfig } from '../shared/config';
 import { isValidDomain } from '../shared/utils';
 import './options';
 
-const flushPromises = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
+import { flushPromises } from '../test-utils/flushPromises';
 
 const mockLoadConfig = loadConfig as jest.MockedFunction<typeof loadConfig>;
 const mockSaveConfig = saveConfig as jest.MockedFunction<typeof saveConfig>;

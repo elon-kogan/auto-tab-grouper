@@ -14,7 +14,7 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "types": ["chrome", "jest"]
+    "types": ["chrome"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

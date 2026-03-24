@@ -90,6 +90,13 @@ describe('isValidDomain', () => {
     expect(isValidDomain('legit.com@evil.com')).toBe(true);
   });
 
+  it('returns true for domain with port (known limitation)', () => {
+    // new URL('https://example.com:8080').hostname === 'example.com' (port stripped)
+    // isValidDomain passes, but extractDomain also strips the port, so
+    // storing 'example.com:8080' as a rule will never match any tab URL.
+    expect(isValidDomain('example.com:8080')).toBe(true);
+  });
+
   it('returns true for valid domain', () => {
     expect(isValidDomain('example.com')).toBe(true);
   });

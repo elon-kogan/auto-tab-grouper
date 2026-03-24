@@ -2,7 +2,7 @@ jest.mock('../shared/config');
 
 import { loadConfig } from '../shared/config';
 
-const flushPromises = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
+import { flushPromises } from '../test-utils/flushPromises';
 
 let mockLoadConfig: jest.MockedFunction<typeof loadConfig>;
 

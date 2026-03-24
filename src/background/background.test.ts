@@ -16,8 +16,7 @@ const mockExtractDomain = extractDomain as jest.MockedFunction<typeof extractDom
 // Import background module — registers event listeners as a side effect
 import './background';
 
-// Helper: flush the microtask queue so fire-and-forget async functions complete
-const flushPromises = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
+import { flushPromises } from '../test-utils/flushPromises';
 
 describe('background', () => {
   beforeEach(() => {

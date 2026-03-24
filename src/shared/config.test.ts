@@ -99,7 +99,12 @@ describe('initializeConfig', () => {
     });
     (chrome.storage.sync.set as jest.Mock).mockResolvedValue(undefined);
     await initializeConfig();
-    expect(chrome.storage.sync.set).toHaveBeenCalled();
+    expect(chrome.storage.sync.set).toHaveBeenCalledWith({
+      tabGrouperConfig: {
+        groups: [{ title: 'Work', color: 'blue', domains: ['github.com'] }],
+        enabled: true,
+      },
+    });
   });
 
   it('initializes with empty config when config.json has no groups', async () => {
