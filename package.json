@@ -1,6 +1,6 @@
 {
   "name": "auto-tab-grouper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Automatically groups tabs by domain using simple rules",
   "scripts": {
     "build": "webpack --mode production",
