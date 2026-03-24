@@ -5,8 +5,7 @@ import './popup';
 
 // NOTE: popup.ts registers chrome.storage.onChanged.addListener inside DOMContentLoaded.
 // Each dispatchEvent(DOMContentLoaded) below adds another listener. This is a known
-// test-suite limitation — fixing it requires jest.isolateModules per test, which is
-// deferred to a future cleanup pass.
+// limitation — fixing it properly requires jest.isolateModules per test.
 const flushPromises = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
 
 const mockLoadConfig = loadConfig as jest.MockedFunction<typeof loadConfig>;
