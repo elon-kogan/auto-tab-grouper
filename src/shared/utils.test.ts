@@ -80,8 +80,14 @@ describe('isValidDomain', () => {
   });
 
   it('returns false for special chars (^)', () => {
-    // @ is treated as a URL username separator and passes; ^ is actually invalid in hostnames
     expect(isValidDomain('exam^ple.com')).toBe(false);
+  });
+
+  it('returns true for domain containing @ (known limitation)', () => {
+    // new URL('https://legit.com@evil.com').hostname === 'evil.com'
+    // The URL parser treats @ as a userinfo separator, so isValidDomain passes
+    // but the effective hostname is evil.com — callers should be aware of this.
+    expect(isValidDomain('legit.com@evil.com')).toBe(true);
   });
 
   it('returns true for valid domain', () => {

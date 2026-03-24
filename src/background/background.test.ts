@@ -88,6 +88,18 @@ describe('background', () => {
       await listener();
       expect(chrome.action.setBadgeText).not.toHaveBeenCalled();
     });
+
+    it('sets badge even when extension is disabled (does not check enabled flag)', async () => {
+      // Unlike onCreated/onUpdated, onStartup does not respect config.enabled.
+      // This test documents the current behaviour — change intentional or a bug to fix later.
+      mockLoadConfig.mockResolvedValue({
+        groups: [{ title: 'Work', color: 'blue', domains: ['github.com'] }],
+        enabled: false,
+      });
+      const [listener] = (chrome.runtime.onStartup as any).getListeners() as Set<() => Promise<void>>;
+      await listener();
+      expect(chrome.action.setBadgeText).toHaveBeenCalledWith({ text: '1' });
+    });
   });
 
   // ── onUpdated ──────────────────────────────────────────────────────────────
