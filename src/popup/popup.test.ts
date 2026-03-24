@@ -1,14 +1,10 @@
 jest.mock('../shared/config');
 
 import { loadConfig } from '../shared/config';
-import './popup';
 
-// NOTE: popup.ts registers chrome.storage.onChanged.addListener inside DOMContentLoaded.
-// Each dispatchEvent(DOMContentLoaded) below adds another listener. This is a known
-// limitation — fixing it properly requires jest.isolateModules per test.
 const flushPromises = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
 
-const mockLoadConfig = loadConfig as jest.MockedFunction<typeof loadConfig>;
+let mockLoadConfig: jest.MockedFunction<typeof loadConfig>;
 
 function setupDOM() {
   document.body.innerHTML = `
@@ -23,6 +19,12 @@ describe('popup page', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     setupDOM();
+    jest.isolateModules(() => {
+      jest.mock('../shared/config');
+      const { loadConfig: lc } = require('../shared/config');
+      mockLoadConfig = lc as jest.MockedFunction<typeof loadConfig>;
+      require('./popup');
+    });
   });
 
   it('calls loadConfig on DOMContentLoaded', async () => {

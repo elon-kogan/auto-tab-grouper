@@ -6,7 +6,7 @@ module.exports = {
       tsconfig: {
         module: 'commonjs',
         esModuleInterop: true,
-        types: ['chrome', 'jest'],
+        types: ['chrome', 'jest', 'node'],
       },
     }],
   },
