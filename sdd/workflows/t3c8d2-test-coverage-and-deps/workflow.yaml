@@ -1,0 +1,23 @@
+id: t3c8d2
+name: test-coverage-and-deps
+source: interactive
+created: 2026-03-24
+current: 01-test-coverage-and-deps
+phase: spec
+step: spec_creation
+
+progress:
+  total_items: 0
+  specs_completed: 0
+  specs_pending: 0
+  plans_completed: 0
+  plans_pending: 0
+  implemented: 0
+  reviewed: 0
+
+items:
+  - id: 01-test-coverage-and-deps
+    title: Test Coverage and Dependencies Update
+    type: epic
+    context_sections: []
+    children: []
