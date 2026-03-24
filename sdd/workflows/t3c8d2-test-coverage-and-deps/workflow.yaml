@@ -3,15 +3,15 @@ name: test-coverage-and-deps
 source: interactive
 created: 2026-03-24
 current: 01-test-coverage-and-deps/01-unit-tests
-phase: spec
-step: spec_review
+phase: implement
+step: implementing
 
 progress:
   total_items: 4
   specs_completed: 4
   specs_pending: 0
-  plans_completed: 0
-  plans_pending: 4
+  plans_completed: 4
+  plans_pending: 0
   implemented: 0
   reviewed: 0
 
@@ -29,7 +29,7 @@ items:
         context_sections: ["### Feature 1 — Unit Tests (Initial Coverage)"]
         depends_on: []
         spec_status: approved
-        plan_status: pending
+        plan_status: plan_approved
         impl_status: pending
         review_status: pending
         substep: null
@@ -42,7 +42,7 @@ items:
         context_sections: ["### Feature 2 — Refactoring + Improved Tests"]
         depends_on: [01-unit-tests]
         spec_status: approved
-        plan_status: pending
+        plan_status: plan_approved
         impl_status: pending
         review_status: pending
         substep: null
@@ -55,7 +55,7 @@ items:
         context_sections: ["### Feature 3 — CI Workflow (100% Coverage Enforcement)"]
         depends_on: [02-refactoring]
         spec_status: approved
-        plan_status: pending
+        plan_status: plan_approved
         impl_status: pending
         review_status: pending
         substep: null
@@ -68,7 +68,7 @@ items:
         context_sections: ["### Feature 4 — Dependencies Update"]
         depends_on: [03-ci]
         spec_status: approved
-        plan_status: pending
+        plan_status: plan_approved
         impl_status: pending
         review_status: pending
         substep: null
