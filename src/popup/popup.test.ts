@@ -3,6 +3,8 @@ jest.mock('../shared/config');
 import { loadConfig, saveConfig } from '../shared/config';
 import './popup';
 
+const flushPromises = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
+
 const mockLoadConfig = loadConfig as jest.MockedFunction<typeof loadConfig>;
 const mockSaveConfig = saveConfig as jest.MockedFunction<typeof saveConfig>;
 
@@ -27,7 +29,7 @@ describe('popup page', () => {
       enabled: true,
     });
     document.dispatchEvent(new Event('DOMContentLoaded'));
-    await new Promise((r) => setTimeout(r, 50));
+    await flushPromises();
 
     const status = document.getElementById('status');
     expect(status?.textContent).toContain('1 group');
@@ -36,7 +38,7 @@ describe('popup page', () => {
   it('shows disabled status when extension is disabled', async () => {
     mockLoadConfig.mockResolvedValue({ groups: [], enabled: false });
     document.dispatchEvent(new Event('DOMContentLoaded'));
-    await new Promise((r) => setTimeout(r, 50));
+    await flushPromises();
 
     const status = document.getElementById('status');
     expect(status?.textContent).toContain('disabled');
@@ -45,7 +47,7 @@ describe('popup page', () => {
   it('calls loadConfig on DOMContentLoaded', async () => {
     mockLoadConfig.mockResolvedValue({ groups: [], enabled: true });
     document.dispatchEvent(new Event('DOMContentLoaded'));
-    await new Promise((r) => setTimeout(r, 50));
+    await flushPromises();
 
     expect(mockLoadConfig).toHaveBeenCalled();
   });
@@ -53,7 +55,7 @@ describe('popup page', () => {
   it('shows empty state when no groups', async () => {
     mockLoadConfig.mockResolvedValue({ groups: [], enabled: true });
     document.dispatchEvent(new Event('DOMContentLoaded'));
-    await new Promise((r) => setTimeout(r, 50));
+    await flushPromises();
 
     const groupsList = document.getElementById('groupsList');
     expect(groupsList?.innerHTML).toContain('No groups');

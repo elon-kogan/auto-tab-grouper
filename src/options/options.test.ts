@@ -5,6 +5,8 @@ import { loadConfig, saveConfig } from '../shared/config';
 import { isValidDomain } from '../shared/utils';
 import './options';
 
+const flushPromises = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
+
 const mockLoadConfig = loadConfig as jest.MockedFunction<typeof loadConfig>;
 const mockSaveConfig = saveConfig as jest.MockedFunction<typeof saveConfig>;
 const mockIsValidDomain = isValidDomain as jest.MockedFunction<typeof isValidDomain>;
@@ -41,7 +43,7 @@ describe('options page', () => {
   it('loads config on DOMContentLoaded', async () => {
     mockLoadConfig.mockResolvedValue({ groups: [], enabled: true });
     document.dispatchEvent(new Event('DOMContentLoaded'));
-    await new Promise((r) => setTimeout(r, 50));
+    await flushPromises();
 
     expect(mockLoadConfig).toHaveBeenCalled();
   });
@@ -52,7 +54,7 @@ describe('options page', () => {
       enabled: true,
     });
     document.dispatchEvent(new Event('DOMContentLoaded'));
-    await new Promise((r) => setTimeout(r, 50));
+    await flushPromises();
 
     const container = document.getElementById('groupsContainer');
     expect(container?.querySelector('.group-card')).not.toBeNull();
@@ -61,7 +63,7 @@ describe('options page', () => {
   it('shows empty state when no groups', async () => {
     mockLoadConfig.mockResolvedValue({ groups: [], enabled: true });
     document.dispatchEvent(new Event('DOMContentLoaded'));
-    await new Promise((r) => setTimeout(r, 50));
+    await flushPromises();
 
     const emptyState = document.getElementById('emptyState');
     expect(emptyState?.style.display).toBe('block');

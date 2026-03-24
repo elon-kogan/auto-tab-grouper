@@ -77,7 +77,7 @@ describe('getDefaultConfig', () => {
 describe('initializeConfig', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-(globalThis as any).fetch = jest.fn();
+    (globalThis as any).fetch = jest.fn();
     (chrome.runtime.getURL as jest.Mock).mockReturnValue('chrome-extension://id/config.json');
   });
 

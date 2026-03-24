@@ -13,10 +13,9 @@ describe('extractDomain', () => {
     expect(extractDomain('file:///path/to/file')).toBe('');
   });
 
-  it('handles chrome:// URL (parses as valid URL)', () => {
-    // chrome:// parses in Node.js; hostname becomes the "host" portion
-    const result = extractDomain('chrome://settings');
-    expect(typeof result).toBe('string');
+  it('handles chrome:// URL (parses hostname as "settings")', () => {
+    // chrome:// is parsed as a valid URL in Node.js; hostname = "settings"
+    expect(extractDomain('chrome://settings')).toBe('settings');
   });
 
   it('extracts domain from https URL', () => {
