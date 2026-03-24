@@ -1,0 +1,72 @@
+{
+  "groups": [
+    {
+      "title": "Work",
+      "color": "blue",
+      "domains": [
+        "github.com",
+        "stackoverflow.com",
+        "docs.google.com",
+        "drive.google.com",
+        "slack.com",
+        "jira.example.com",
+        "confluence.example.com"
+      ]
+    },
+    {
+      "title": "Development",
+      "color": "green",
+      "domains": [
+        "localhost:3000",
+        "localhost:8080",
+        "dev.example.com",
+        "staging.example.com",
+        "test.example.com",
+        "api-dev.example.com"
+      ]
+    },
+    {
+      "title": "Social Media",
+      "color": "pink",
+      "domains": [
+        "twitter.com",
+        "facebook.com",
+        "linkedin.com",
+        "instagram.com",
+        "reddit.com"
+      ]
+    },
+    {
+      "title": "News & Reading",
+      "color": "purple",
+      "domains": [
+        "news.ycombinator.com",
+        "medium.com",
+        "dev.to",
+        "techcrunch.com",
+        "arstechnica.com"
+      ]
+    },
+    {
+      "title": "Shopping",
+      "color": "yellow",
+      "domains": [
+        "amazon.com",
+        "ebay.com",
+        "etsy.com"
+      ]
+    },
+    {
+      "title": "Entertainment",
+      "color": "cyan",
+      "domains": [
+        "youtube.com",
+        "netflix.com",
+        "spotify.com",
+        "twitch.tv"
+      ]
+    }
+  ],
+  "enabled": true
+}
+

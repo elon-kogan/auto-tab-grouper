@@ -1,0 +1,31 @@
+{
+  "name": "auto-tab-grouper",
+  "version": "0.0.2",
+  "description": "Automatically groups tabs by domain using simple rules",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
+    "clean": "rm -rf dist",
+    "cleanup": "cd dist && find . -name '*.map' -delete && find . -name '*.d.ts' -delete && find . -name '*.d.ts.map' -delete && rm -rf background popup options shared && cd .. && echo '✓ Cleanup complete'",
+    "package": "npm run build && npm run cleanup && cd dist && zip -r ../auto-tab-grouper-alpha.zip . && cd .. && echo '✓ Package created: auto-tab-grouper-alpha.zip'",
+    "package:release": "npm run build && npm run cleanup && VERSION=$(node -p \"require('./package.json').version\") && cd dist && zip -r ../auto-tab-grouper-v$VERSION.zip . && cd .. && echo '✓ Release package created: auto-tab-grouper-v'$VERSION'.zip'"
+  },
+  "keywords": [
+    "chrome-extension",
+    "tabs",
+    "tab-groups"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
+  }
+}
