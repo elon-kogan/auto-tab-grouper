@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 jest.mock('../shared/config');
 jest.mock('../shared/utils');
 

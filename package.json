@@ -4,6 +4,7 @@
   "description": "Automatically groups tabs by domain using simple rules",
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "build": "webpack --mode production",
     "dev": "webpack --mode development --watch",
     "clean": "rm -rf dist",
