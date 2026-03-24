@@ -1,0 +1,61 @@
+jest.mock('../shared/config');
+
+import { loadConfig, saveConfig } from '../shared/config';
+import './popup';
+
+const mockLoadConfig = loadConfig as jest.MockedFunction<typeof loadConfig>;
+const mockSaveConfig = saveConfig as jest.MockedFunction<typeof saveConfig>;
+
+function setupDOM() {
+  document.body.innerHTML = `
+    <input id="enabledToggle" type="checkbox" />
+    <div id="status"></div>
+    <div id="groupsList"></div>
+    <button id="openOptions"></button>
+  `;
+}
+
+describe('popup page', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    setupDOM();
+  });
+
+  it('shows active group count when enabled', async () => {
+    mockLoadConfig.mockResolvedValue({
+      groups: [{ title: 'Work', color: 'blue', domains: ['github.com'] }],
+      enabled: true,
+    });
+    document.dispatchEvent(new Event('DOMContentLoaded'));
+    await new Promise((r) => setTimeout(r, 50));
+
+    const status = document.getElementById('status');
+    expect(status?.textContent).toContain('1 group');
+  });
+
+  it('shows disabled status when extension is disabled', async () => {
+    mockLoadConfig.mockResolvedValue({ groups: [], enabled: false });
+    document.dispatchEvent(new Event('DOMContentLoaded'));
+    await new Promise((r) => setTimeout(r, 50));
+
+    const status = document.getElementById('status');
+    expect(status?.textContent).toContain('disabled');
+  });
+
+  it('calls loadConfig on DOMContentLoaded', async () => {
+    mockLoadConfig.mockResolvedValue({ groups: [], enabled: true });
+    document.dispatchEvent(new Event('DOMContentLoaded'));
+    await new Promise((r) => setTimeout(r, 50));
+
+    expect(mockLoadConfig).toHaveBeenCalled();
+  });
+
+  it('shows empty state when no groups', async () => {
+    mockLoadConfig.mockResolvedValue({ groups: [], enabled: true });
+    document.dispatchEvent(new Event('DOMContentLoaded'));
+    await new Promise((r) => setTimeout(r, 50));
+
+    const groupsList = document.getElementById('groupsList');
+    expect(groupsList?.innerHTML).toContain('No groups');
+  });
+});

@@ -112,14 +112,24 @@ sdd_version: 7.3.0
 
 ## Implementation State
 
-- **Current Phase:** pending
-- **Status:** pending
+- **Current Phase:** Phase 4: PR
+- **Status:** complete
 - **Completed Phases:**
-  - [ ] Phase 1: Test Infrastructure Setup
-  - [ ] Phase 2: Core Module Tests
-  - [ ] Phase 3: UI Module Tests
+  - [x] Phase 1: Test Infrastructure Setup
+  - [x] Phase 2: Core Module Tests
+  - [x] Phase 3: UI Module Tests
   - [ ] Phase 4: PR
-- **Actual Files Changed:** —
+- **Actual Files Changed:**
+  - `package.json` — added `test` script, devDependencies: jest, ts-jest, jest-chrome, @types/jest, jest-environment-jsdom
+  - `tsconfig.json` — added `jest` to types
+  - `jest.config.js` — new file
+  - `jest.setup.js` — new file (global chrome mock + manual mocks for tabGroups/action/tabs.group)
+  - `__mocks__/styleMock.js` — new file (CSS mock)
+  - `src/shared/utils.test.ts` — new file (100% coverage)
+  - `src/shared/config.test.ts` — new file (100% coverage)
+  - `src/background/background.test.ts` — new file (100% coverage)
+  - `src/options/options.test.ts` — new file (best-effort coverage)
+  - `src/popup/popup.test.ts` — new file (best-effort coverage)
 - **Blockers:** none
 
 ## Risks
