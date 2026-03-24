@@ -2,16 +2,16 @@ id: t3c8d2
 name: test-coverage-and-deps
 source: interactive
 created: 2026-03-24
-current: 01-test-coverage-and-deps
+current: 01-test-coverage-and-deps/01-unit-tests
 phase: spec
-step: spec_creation
+step: spec_review
 
 progress:
-  total_items: 0
+  total_items: 4
   specs_completed: 0
-  specs_pending: 0
+  specs_pending: 4
   plans_completed: 0
-  plans_pending: 0
+  plans_pending: 4
   implemented: 0
   reviewed: 0
 
@@ -20,4 +20,55 @@ items:
     title: Test Coverage and Dependencies Update
     type: epic
     context_sections: []
-    children: []
+    children:
+      - id: 01-unit-tests
+        change_id: test-coverage-and-deps-1
+        title: Unit Tests (Initial Coverage)
+        type: feature
+        location: sdd/workflows/t3c8d2-test-coverage-and-deps/drafts/01-test-coverage-and-deps/01-unit-tests
+        context_sections: ["### Feature 1 — Unit Tests (Initial Coverage)"]
+        depends_on: []
+        spec_status: pending
+        plan_status: pending
+        impl_status: pending
+        review_status: pending
+        substep: null
+
+      - id: 02-refactoring
+        change_id: test-coverage-and-deps-2
+        title: Refactoring + Improved Tests
+        type: feature
+        location: sdd/workflows/t3c8d2-test-coverage-and-deps/drafts/01-test-coverage-and-deps/02-refactoring
+        context_sections: ["### Feature 2 — Refactoring + Improved Tests"]
+        depends_on: [01-unit-tests]
+        spec_status: pending
+        plan_status: pending
+        impl_status: pending
+        review_status: pending
+        substep: null
+
+      - id: 03-ci
+        change_id: test-coverage-and-deps-3
+        title: CI Workflow (100% Coverage Enforcement)
+        type: feature
+        location: sdd/workflows/t3c8d2-test-coverage-and-deps/drafts/01-test-coverage-and-deps/03-ci
+        context_sections: ["### Feature 3 — CI Workflow (100% Coverage Enforcement)"]
+        depends_on: [02-refactoring]
+        spec_status: pending
+        plan_status: pending
+        impl_status: pending
+        review_status: pending
+        substep: null
+
+      - id: 04-deps-update
+        change_id: test-coverage-and-deps-4
+        title: Dependencies Update
+        type: feature
+        location: sdd/workflows/t3c8d2-test-coverage-and-deps/drafts/01-test-coverage-and-deps/04-deps-update
+        context_sections: ["### Feature 4 — Dependencies Update"]
+        depends_on: [03-ci]
+        spec_status: pending
+        plan_status: pending
+        impl_status: pending
+        review_status: pending
+        substep: null
