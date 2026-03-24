@@ -8,7 +8,10 @@
     "clean": "rm -rf dist",
     "cleanup": "cd dist && find . -name '*.map' -delete && find . -name '*.d.ts' -delete && find . -name '*.d.ts.map' -delete && rm -rf background popup options shared && cd .. && echo '✓ Cleanup complete'",
     "package": "npm run build && npm run cleanup && cd dist && zip -r ../auto-tab-grouper-alpha.zip . && cd .. && echo '✓ Package created: auto-tab-grouper-alpha.zip'",
-    "package:release": "npm run build && npm run cleanup && VERSION=$(node -p \"require('./package.json').version\") && cd dist && zip -r ../auto-tab-grouper-v$VERSION.zip . && cd .. && echo '✓ Release package created: auto-tab-grouper-v'$VERSION'.zip'"
+    "package:release": "npm run build && npm run cleanup && VERSION=$(node -p \"require('./package.json').version\") && cd dist && zip -r ../auto-tab-grouper-v$VERSION.zip . && cd .. && echo '✓ Release package created: auto-tab-grouper-v'$VERSION'.zip'",
+    "version": "node -e \"const fs=require('fs'); const m=JSON.parse(fs.readFileSync('manifest.json')); m.version=process.env.npm_package_version; fs.writeFileSync('manifest.json', JSON.stringify(m, null, 2)+'\\n');\" && git add manifest.json",
+    "release:patch": "npm version patch -m 'release: v%s' && git push --follow-tags",
+    "release:minor": "npm version minor -m 'release: v%s' && git push --follow-tags"
   },
   "keywords": [
     "chrome-extension",

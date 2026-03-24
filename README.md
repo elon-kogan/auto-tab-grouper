@@ -1,5 +1,7 @@
 # Auto Tab Grouper
 
+![GitHub release](https://img.shields.io/github/v/release/elon-kogan/auto-tab-grouper)
+
 A Chrome extension that automatically groups browser tabs by domain using configurable rules.
 
 ## Features
