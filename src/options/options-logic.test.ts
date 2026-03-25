@@ -26,6 +26,10 @@ describe('validateGroupData', () => {
   it('returns false when both title and domains are empty', () => {
     expect(validateGroupData('', [])).toBe(false);
   });
+
+  it('returns false for whitespace-only title', () => {
+    expect(validateGroupData('   ', ['github.com'])).toBe(false);
+  });
 });
 
 describe('parseGroupFromInputs', () => {
@@ -110,5 +114,10 @@ describe('parseImportedConfig', () => {
   it('throws when a group has non-array domains', () => {
     const config = { groups: [{ title: 'Work', color: 'blue', domains: 'github.com' }] };
     expect(() => parseImportedConfig(JSON.stringify(config))).toThrow('Invalid group structure');
+  });
+
+  it('throws when a group has an invalid color', () => {
+    const config = { groups: [{ title: 'Work', color: 'invalid-color', domains: ['github.com'] }] };
+    expect(() => parseImportedConfig(JSON.stringify(config))).toThrow('Invalid group color: invalid-color');
   });
 });

@@ -97,4 +97,11 @@ describe('renderGroupItem', () => {
     expect(html).not.toContain('<img');
     expect(html).toContain('&lt;img');
   });
+
+  it('escapes HTML in color to prevent injection', () => {
+    const malicious = { title: 'X', color: '" onmouseover="alert(1)', domains: [] } as unknown as TabGroupConfig;
+    const html = renderGroupItem(malicious);
+    expect(html).not.toContain('onmouseover');
+    expect(html).toContain('&quot;');
+  });
 });

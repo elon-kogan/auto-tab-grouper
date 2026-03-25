@@ -127,7 +127,7 @@ function collectGroupsFromUI(): TabGroupConfig[] {
 
     const group = parseGroupFromInputs(
       titleInput?.value || '',
-      colorSelect?.value || 'grey',
+      colorSelect?.value || '',
       domainsInput?.value || '',
     );
     if (group) groups.push(group);

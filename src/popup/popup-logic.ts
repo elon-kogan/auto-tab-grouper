@@ -39,7 +39,7 @@ export function renderGroupItem(group: TabGroupConfig): string {
   return `
         <div class="group-item">
           <div class="group-info">
-            <div class="group-color color-${group.color}"></div>
+            <div class="group-color color-${escapeHtml(group.color)}"></div>
             <div>
               <div class="group-title">${escapeHtml(group.title)}</div>
               <div class="group-domains">${domainCount} domain${domainCount !== 1 ? 's' : ''}</div>

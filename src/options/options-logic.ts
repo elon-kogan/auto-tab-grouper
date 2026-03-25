@@ -5,7 +5,7 @@ import { isValidDomain } from '../shared/utils';
  * Returns true if the given title and domains form a valid group.
  */
 export function validateGroupData(title: string, domains: string[]): boolean {
-  return title.length > 0 && domains.length > 0;
+  return title.trim().length > 0 && domains.length > 0;
 }
 
 /**
@@ -42,9 +42,14 @@ export function parseImportedConfig(text: string): Config {
     throw new Error('Invalid configuration format');
   }
 
+  const validColors: TabGroupColor[] = ['grey', 'blue', 'red', 'yellow', 'green', 'pink', 'purple', 'cyan'];
+
   for (const group of imported.groups) {
     if (!group.title || !group.color || !group.domains || !Array.isArray(group.domains)) {
       throw new Error('Invalid group structure');
+    }
+    if (!validColors.includes(group.color)) {
+      throw new Error(`Invalid group color: ${group.color}`);
     }
   }
 
