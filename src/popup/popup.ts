@@ -1,7 +1,8 @@
 /// <reference types="chrome" />
 import { loadConfig, saveConfig } from '../shared/config';
-import { Config, TabGroupConfig } from '../shared/types';
+import { Config } from '../shared/types';
 import './popup.css';
+import { getStatusInfo, renderGroupItem } from './popup-logic';
 
 let currentConfig: Config | null = null;
 
@@ -20,16 +21,9 @@ async function updateUI(): Promise<void> {
   // Update status
   const statusEl = document.getElementById('status');
   if (statusEl) {
-    if (currentConfig.enabled === false) {
-      statusEl.textContent = 'Extension is disabled';
-      statusEl.className = 'status disabled';
-    } else {
-      const activeGroups = currentConfig.groups.filter(
-        (g) => g.domains && g.domains.length > 0,
-      ).length;
-      statusEl.textContent = `Active: ${activeGroups} group${activeGroups !== 1 ? 's' : ''}`;
-      statusEl.className = 'status';
-    }
+    const { text, className } = getStatusInfo(currentConfig);
+    statusEl.textContent = text;
+    statusEl.className = className;
   }
 
   // Update groups list
@@ -50,31 +44,7 @@ function updateGroupsList(): void {
     return;
   }
 
-  groupsList.innerHTML = currentConfig.groups
-    .map((group: TabGroupConfig) => {
-      const domainCount = group.domains ? group.domains.length : 0;
-      return `
-        <div class="group-item">
-          <div class="group-info">
-            <div class="group-color color-${group.color}"></div>
-            <div>
-              <div class="group-title">${escapeHtml(group.title)}</div>
-              <div class="group-domains">${domainCount} domain${domainCount !== 1 ? 's' : ''}</div>
-            </div>
-          </div>
-        </div>
-      `;
-    })
-    .join('');
-}
-
-/**
- * Escapes HTML to prevent XSS
- */
-function escapeHtml(text: string): string {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
+  groupsList.innerHTML = currentConfig.groups.map(renderGroupItem).join('');
 }
 
 /**

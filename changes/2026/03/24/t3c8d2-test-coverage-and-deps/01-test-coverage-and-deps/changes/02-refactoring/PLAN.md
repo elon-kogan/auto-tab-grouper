@@ -100,13 +100,19 @@ sdd_version: 7.3.0
 
 ## Implementation State
 
-- **Current Phase:** pending
-- **Status:** pending
+- **Current Phase:** Phase 3: PR
+- **Status:** in_progress
 - **Completed Phases:**
-  - [ ] Phase 1: Extract options-logic.ts
-  - [ ] Phase 2: Extract popup-logic.ts
+  - [x] Phase 1: Extract options-logic.ts
+  - [x] Phase 2: Extract popup-logic.ts
   - [ ] Phase 3: PR
-- **Actual Files Changed:** —
+- **Actual Files Changed:**
+  - `src/options/options-logic.ts` (created)
+  - `src/options/options-logic.test.ts` (created)
+  - `src/options/options.ts` (modified)
+  - `src/popup/popup-logic.ts` (created)
+  - `src/popup/popup-logic.test.ts` (created)
+  - `src/popup/popup.ts` (modified)
 - **Blockers:** none
 
 ## Risks
