@@ -12,7 +12,7 @@ progress:
   specs_pending: 0
   plans_completed: 4
   plans_pending: 0
-  implemented: 2
+  implemented: 3
   reviewed: 2
 
 items:
@@ -56,9 +56,10 @@ items:
         depends_on: [02-refactoring]
         spec_status: approved
         plan_status: plan_approved
-        impl_status: pending
+        impl_status: complete
         review_status: pending
         substep: null
+        pr: https://github.com/elon-kogan/auto-tab-grouper/pull/14
 
       - id: 04-deps-update
         change_id: test-coverage-and-deps-4
