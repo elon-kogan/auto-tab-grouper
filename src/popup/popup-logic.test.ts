@@ -42,6 +42,14 @@ describe('getStatusInfo', () => {
     };
     expect(getStatusInfo(config).text).toBe('Active: 0 groups');
   });
+
+  it('does not count groups with missing domains', () => {
+    const config = {
+      groups: [{ title: 'Empty', color: 'grey' }],
+      enabled: true,
+    } as unknown as Config;
+    expect(getStatusInfo(config).text).toBe('Active: 0 groups');
+  });
 });
 
 describe('escapeHtml', () => {
@@ -89,6 +97,11 @@ describe('renderGroupItem', () => {
     const g: TabGroupConfig = { title: 'Solo', color: 'red', domains: ['example.com'] };
     expect(renderGroupItem(g)).toContain('1 domain');
     expect(renderGroupItem(g)).not.toContain('1 domains');
+  });
+
+  it('shows 0 domains when domains is missing', () => {
+    const g = { title: 'X', color: 'grey' } as unknown as TabGroupConfig;
+    expect(renderGroupItem(g)).toContain('0 domains');
   });
 
   it('escapes HTML in title to prevent XSS', () => {
