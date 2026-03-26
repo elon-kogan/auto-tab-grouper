@@ -101,7 +101,9 @@ describe('renderGroupItem', () => {
   it('escapes HTML in color to prevent injection', () => {
     const malicious = { title: 'X', color: '" onmouseover="alert(1)', domains: [] } as unknown as TabGroupConfig;
     const html = renderGroupItem(malicious);
-    expect(html).not.toContain('onmouseover');
-    expect(html).toContain('&quot;');
+    // Raw unescaped quote must not appear — it would break the attribute boundary
+    expect(html).not.toContain('color-"');
+    // The quote is safely escaped as &quot;
+    expect(html).toContain('color-&quot;');
   });
 });
