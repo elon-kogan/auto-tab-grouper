@@ -2,9 +2,9 @@ id: t3c8d2
 name: test-coverage-and-deps
 source: interactive
 created: 2026-03-24
-current: 01-test-coverage-and-deps/02-refactoring
-phase: review
-step: ready_for_review
+current: 01-test-coverage-and-deps/03-ci
+phase: implement
+step: implementing
 
 progress:
   total_items: 4
@@ -13,7 +13,7 @@ progress:
   plans_completed: 4
   plans_pending: 0
   implemented: 2
-  reviewed: 1
+  reviewed: 2
 
 items:
   - id: 01-test-coverage-and-deps
@@ -44,7 +44,7 @@ items:
         spec_status: approved
         plan_status: plan_approved
         impl_status: complete
-        review_status: ready_for_review
+        review_status: approved
         substep: null
 
       - id: 03-ci
