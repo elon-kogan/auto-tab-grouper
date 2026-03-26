@@ -15,9 +15,15 @@ module.exports = {
   },
   coverageThreshold: {
     // Core modules must stay at 100%
-    './src/background/background.ts': { statements: 100, branches: 100, functions: 100, lines: 100 },
-    './src/shared/config.ts':         { statements: 100, branches: 100, functions: 100, lines: 100 },
-    './src/shared/utils.ts':          { statements: 100, branches: 100, functions: 100, lines: 100 },
+    './src/background/background.ts':    { statements: 100, branches: 100, functions: 100, lines: 100 },
+    './src/shared/config.ts':            { statements: 100, branches: 100, functions: 100, lines: 100 },
+    './src/shared/utils.ts':             { statements: 100, branches: 100, functions: 100, lines: 100 },
+    // Logic modules (pure, no DOM) must stay at 100%
+    './src/options/options-logic.ts':    { statements: 100, branches: 100, functions: 100, lines: 100 },
+    './src/popup/popup-logic.ts':        { statements: 100, branches: 100, functions: 100, lines: 100 },
+    // DOM-dependent modules — coverage limited by untested event handlers
+    './src/options/options.ts':          { statements: 45, branches: 45, functions: 30, lines: 45 },
+    './src/popup/popup.ts':              { statements: 70, branches: 50, functions: 40, lines: 70 },
   },
   collectCoverageFrom: [
     'src/**/*.ts',

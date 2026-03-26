@@ -1,8 +1,8 @@
 /// <reference types="chrome" />
 import { loadConfig, saveConfig } from '../shared/config';
-import { Config, TabGroupConfig, TabGroupColor } from '../shared/types';
-import { isValidDomain } from '../shared/utils';
+import { Config, TabGroupConfig } from '../shared/types';
 import './options.css';
+import { validateGroupData, parseGroupFromInputs, parseImportedConfig } from './options-logic';
 
 let currentConfig: Config | null = null;
 let hasUnsavedChanges = false;
@@ -106,9 +106,7 @@ function validateGroup(card: HTMLElement): void {
     .map((d) => d.trim())
     .filter((d) => d.length > 0) || [];
 
-  const isValid = title.length > 0 && domains.length > 0;
-
-  if (isValid) {
+  if (validateGroupData(title, domains)) {
     card.classList.remove('invalid');
   } else {
     card.classList.add('invalid');
@@ -127,17 +125,12 @@ function collectGroupsFromUI(): TabGroupConfig[] {
     const colorSelect = card.querySelector('.group-color-select') as HTMLSelectElement;
     const domainsInput = card.querySelector('.domains-input') as HTMLTextAreaElement;
 
-    const title = titleInput?.value.trim() || '';
-    const color = (colorSelect?.value as TabGroupColor) || 'grey';
-    const domains = domainsInput?.value
-      .split('\n')
-      .map((d) => d.trim())
-      .filter((d) => d.length > 0)
-      .filter((d) => isValidDomain(d));
-
-    if (title.length > 0 && domains.length > 0) {
-      groups.push({ title, color, domains });
-    }
+    const group = parseGroupFromInputs(
+      titleInput?.value || '',
+      colorSelect?.value || '',
+      domainsInput?.value || '',
+    );
+    if (group) groups.push(group);
   });
 
   return groups;
@@ -239,25 +232,7 @@ function exportConfig(): void {
 async function importConfig(file: File): Promise<void> {
   try {
     const text = await file.text();
-    const imported = JSON.parse(text) as Config;
-
-    // Validate structure
-    if (!imported.groups || !Array.isArray(imported.groups)) {
-      throw new Error('Invalid configuration format');
-    }
-
-    // Validate groups
-    for (const group of imported.groups) {
-      if (!group.title || !group.color || !group.domains || !Array.isArray(group.domains)) {
-        throw new Error('Invalid group structure');
-      }
-    }
-
-    currentConfig = {
-      groups: imported.groups,
-      enabled: imported.enabled !== false,
-    };
-
+    currentConfig = parseImportedConfig(text);
     renderGroups();
     markUnsavedChanges();
     showSaveStatus('Configuration imported. Click "Save Changes" to apply.', 'success');

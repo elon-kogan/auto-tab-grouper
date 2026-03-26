@@ -22,3 +22,9 @@ chrome.tabs.get = jest.fn();
 if (typeof window !== 'undefined') {
   window.confirm = jest.fn();
 }
+
+// Suppress console output in tests to keep the output clean.
+// Tests that need to assert on console calls can spy on these in their own beforeEach.
+jest.spyOn(console, 'log').mockImplementation(() => {});
+jest.spyOn(console, 'warn').mockImplementation(() => {});
+jest.spyOn(console, 'error').mockImplementation(() => {});
